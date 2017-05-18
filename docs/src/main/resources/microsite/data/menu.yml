@@ -19,3 +19,6 @@ options:
 
   - title: Activity API
     url: activity.html
+
+  - title: Contributing
+    url: contributing.html
