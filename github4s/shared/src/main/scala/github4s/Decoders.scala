@@ -165,6 +165,7 @@ object Decoders {
       case "APPROVE" => PRRStateApprove()
       case "REQUEST_CHANGES" => PRRStateRequestChanges()
       case "COMMENTED" => PRRStateCommented()
+      case "PENDING" => PRRStatePending()
     }
 
   implicit val decodeGist: Decoder[Gist] = Decoder.instance { c ⇒

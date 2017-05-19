@@ -115,5 +115,4 @@ sealed abstract class PullRequestReviewState(val value: String)
 case class PRRStateApprove()        extends PullRequestReviewState("APPROVE")
 case class PRRStateRequestChanges() extends PullRequestReviewState("REQUEST_CHANGES")
 case class PRRStateCommented()      extends PullRequestReviewState("COMMENTED")
-// TODO: This requires additional, conditional support for just this state.
-//case class PRRStatePending()        extends PullRequestReviewState("PENDING")
+case class PRRStatePending()        extends PullRequestReviewState("PENDING")
