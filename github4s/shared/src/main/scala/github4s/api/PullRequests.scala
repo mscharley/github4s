@@ -119,6 +119,15 @@ class PullRequests[C, M[_]](
       .post[PullRequest](accessToken, s"repos/$owner/$repo/pulls", headers, data.asJson.noSpaces)
   }
 
+  /**
+   * List pull request reviews.
+   *
+   * @param accessToken Token to identify the authenticated user
+   * @param headers Optional user header to include in the request
+   * @param owner Owner of the repo
+   * @param repo Name of the repo
+   * @param pullRequest ID number of the PR to get reviews for.
+   */
   def listReviews(
       accessToken: Option[String] = None,
       headers: Map[String, String] = Map(),
