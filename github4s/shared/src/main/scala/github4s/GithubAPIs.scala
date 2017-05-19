@@ -315,4 +315,11 @@ class GHPullRequests(accessToken: Option[String] = None)(implicit O: PullRequest
       maintainerCanModify: Option[Boolean] = Some(true)
   ): GHIO[GHResponse[PullRequest]] =
     O.createPullRequest(owner, repo, newPullRequest, head, base, maintainerCanModify, accessToken)
+
+  def listReviews(
+      owner: String,
+      repo: String,
+      pullRequest: Int
+  ): GHIO[GHResponse[List[PullRequestReview]]] =
+    O.listPullRequestReviews(owner, repo, pullRequest, accessToken)
 }

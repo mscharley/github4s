@@ -118,4 +118,13 @@ class PullRequests[C, M[_]](
     httpClient
       .post[PullRequest](accessToken, s"repos/$owner/$repo/pulls", headers, data.asJson.noSpaces)
   }
+
+  def listReviews(
+      accessToken: Option[String] = None,
+      headers: Map[String, String] = Map(),
+      owner: String,
+      repo: String,
+      pullRequest: Int): M[GHResponse[List[PullRequestReview]]] = {
+    httpClient.get[List[PullRequestReview]](accessToken, s"repos/$owner/$repo/pulls/$pullRequest/reviews", headers)
+  }
 }

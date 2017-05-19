@@ -101,3 +101,22 @@ case object PRFilterOrderDesc extends PRFilterDirection("desc")
 sealed trait NewPullRequest
 case class NewPullRequestData(title: String, body: String) extends NewPullRequest
 case class NewPullRequestIssue(issue: Int)                 extends NewPullRequest
+
+case class PullRequestReview(
+    id: Int,
+    user: User,
+    body: String,
+    commit_id: String,
+    state: PullRequestReviewState,
+    html_url: String,
+    pull_request_url: String)
+
+sealed abstract class PullRequestReviewState(val value: String)
+object PullRequestReviewState {
+
+}
+case class PRRStateApprove()        extends PullRequestReviewState("APPROVE")
+case class PRRStateRequestChanges() extends PullRequestReviewState("REQUEST_CHANGES")
+case class PRRStateCommented()      extends PullRequestReviewState("COMMENTED")
+// TODO: This requires additional, conditional support for just this state.
+//case class PRRStatePending()        extends PullRequestReviewState("PENDING")

@@ -309,6 +309,8 @@ class Interpreters[M[_], C](
                 head,
                 base,
                 maintainerCanModify)
+          case ListPullRequestReviews(owner, repo, pullRequest, accessToken) ⇒
+            pullRequests.listReviews(accessToken, headers, owner, repo, pullRequest)
         }
       }
     }
