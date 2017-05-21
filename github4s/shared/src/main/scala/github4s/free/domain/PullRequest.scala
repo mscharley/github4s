@@ -112,7 +112,7 @@ case class PullRequestReview(
     pull_request_url: String)
 
 sealed abstract class PullRequestReviewState(val value: String)
-case class PRRStateApprove()        extends PullRequestReviewState("APPROVE")
-case class PRRStateRequestChanges() extends PullRequestReviewState("REQUEST_CHANGES")
-case class PRRStateCommented()      extends PullRequestReviewState("COMMENTED")
-case class PRRStatePending()        extends PullRequestReviewState("PENDING")
+case object PRRStateApprove        extends PullRequestReviewState("APPROVE")
+case object PRRStateRequestChanges extends PullRequestReviewState("REQUEST_CHANGES")
+case object PRRStateCommented      extends PullRequestReviewState("COMMENTED")
+case object PRRStatePending        extends PullRequestReviewState("PENDING")
