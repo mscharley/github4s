@@ -361,7 +361,7 @@ trait TestData extends DummyGithubUrls {
 
   val pullRequestReview = PullRequestReview(
     id = validPullRequestReviewNumber,
-    user = user,
+    user = Some(user),
     body = validCommentBody,
     commit_id = validCommitSha,
     state = PRRStateCommented,

@@ -104,7 +104,7 @@ case class NewPullRequestIssue(issue: Int)                 extends NewPullReques
 
 case class PullRequestReview(
     id: Int,
-    user: User,
+    user: Option[User],
     body: String,
     commit_id: String,
     state: PullRequestReviewState,
