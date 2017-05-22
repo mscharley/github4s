@@ -171,6 +171,13 @@ object Decoders {
       case "DISMISSED"         => PRRStateDismissed
     }
 
+  implicit val decodePrmsStatus: Decoder[PullRequestMergeStrategy] =
+    Decoder.decodeString.map {
+      case "merge"  => PRMSMerge
+      case "rebase" => PRMSRebase
+      case "squash" => PRMSSquash
+    }
+
   implicit val decodeGist: Decoder[Gist] = Decoder.instance { c ⇒
     for {
       url         ← c.downField("url").as[String]

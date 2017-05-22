@@ -117,3 +117,8 @@ case object PRRStateChangesRequested extends PullRequestReviewState("CHANGES_REQ
 case object PRRStateCommented        extends PullRequestReviewState("COMMENTED")
 case object PRRStatePending          extends PullRequestReviewState("PENDING")
 case object PRRStateDismissed        extends PullRequestReviewState("DISMISSED")
+
+sealed abstract class PullRequestMergeStrategy(val value: String)
+case object PRMSMerge  extends PullRequestMergeStrategy("merge")
+case object PRMSRebase extends PullRequestMergeStrategy("rebase")
+case object PRMSSquash extends PullRequestMergeStrategy("squash")
