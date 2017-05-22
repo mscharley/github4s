@@ -31,15 +31,15 @@ import scalaj.http.HttpResponse
 val accessToken = sys.env.get("GITHUB4S_ACCESS_TOKEN")
 ```
 
-They also make use of `cats.Id` but any type container implementing `MonadError[M, Throwable]` will do.
+They also make use of `cats.Id`, but any type container implementing `MonadError[M, Throwable]` will do.
 
-Support for `cats.Id`, `cats.Eval` and `Future` (the only supported option for scala-js) are
+Support for `cats.Id`, `cats.Eval`, and `Future` (the only supported option for scala-js) are
 provided out of the box when importing `github4s.{js,jvm}.Implicits._`.
 ## Repository
 
 ### Get a repository
 
-You can get a repository using `get`, it takes as arguments:
+You can get a repository using `get`; it takes as arguments:
 
 - the repository coordinates (`owner` and `name` of the repository).
 
@@ -50,7 +50,7 @@ val getRepo =
   Github(accessToken).repos.get("47deg", "github4s")
 
 getRepo.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
@@ -77,7 +77,7 @@ val listContributors =
   Github(accessToken).repos.listContributors("47deg", "github4s", Some("true"))
 
 listContributors.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
@@ -115,7 +115,7 @@ val listCommits =
   Some("2014-11-07T22:01:45Z"))
 
 listCommits.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
@@ -144,7 +144,7 @@ val getContents =
   Github(accessToken).repos.getContents("47deg", "github4s", "README.md", Some("heads/master"))
 
 getContents.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
@@ -158,7 +158,7 @@ reference.
 
 ### Create a release
 
-Users with push access to the repository can create a release using `createRelease`, it takes as arguments:
+Users with push access to the repository can create a release using `createRelease`; it takes as arguments:
 
 - the repository coordinates (`owner` and `name` of the repository).
 - `tag_name`: The name of the tag.
@@ -167,7 +167,7 @@ Users with push access to the repository can create a release using `createRelea
 - `target_commitish`: Specifies the commitish value that determines where the `Git tag` is created from.
 Can be any branch or commit `SHA`. Unused if the `Git tag` already exists. Default: the repository's default branch (usually `master`).
 - `draft`: true to create a draft (unpublished) release, false to create a published one. Default: false.
-- `prerelease`: true to identify the release as a prerelease. false to identify the release as a full release. Default: false.
+- `prerelease`: true to identify the release as a pre-release. false to identify the release as a full release. Default: false.
 
 To create a release:
 
@@ -176,7 +176,7 @@ val createRelease =
   Github(accessToken).repos.createRelease("47deg", "github4s", "v0.1.0", "v0.1.0", "New access token", Some("master"), Some(false), Some(false))
 
 createRelease.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
@@ -190,7 +190,7 @@ reference.
 
 ### Create a status
 
-You can create a status using `createStatus`, it takes as arguments:
+You can create a status using `createStatus`; it takes as arguments:
 
 - the repository coordinates (`owner` and `name` of the repository).
 - the `SHA` of the commit for which we want to create a status.
@@ -204,7 +204,7 @@ val createStatus =
   Github(accessToken).repos.createStatus("47deg", "github4s", "aaaaaa", "pending")
 
 createStatus.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
@@ -216,8 +216,7 @@ reference.
 
 ### List status for a specific Ref
 
-
-You can also list status through `listStatus`, it take as arguments:
+You can also list statuses through `listStatuses`; it take as arguments:
 
 - the repository coordinates (`owner` and `name` of the repository).
 - a git ref (a `SHA`, a branch `name` or a tag `name`).
@@ -225,11 +224,11 @@ You can also list status through `listStatus`, it take as arguments:
 To list the statuses for a specific ref:
 
 ```tut:silent
-val listStatus =
-  Github(accessToken).repos.listStatus("47deg", "github4s", "heads/master")
+val listStatuses =
+  Github(accessToken).repos.listStatuses("47deg", "github4s", "heads/master")
 
-listStatus.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+listStatuses.exec[cats.Id, HttpResponse[String]]() match {
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
@@ -241,7 +240,7 @@ for full reference.
 
 ### Get the combined status for a specific Ref
 
-Lastly, you can also get the combined status thanks to `getCombinedStatus`, it takes the same
+Lastly, you can also get the combined status thanks to `getCombinedStatus`; it takes the same
 arguments as the operation listing statuses:
 
 ```tut:silent
@@ -249,7 +248,7 @@ val combinedStatus =
   Github(accessToken).repos.getCombinedStatus("47deg", "github4s", "heads/master")
 
 combinedStatus.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```

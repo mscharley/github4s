@@ -24,9 +24,9 @@ import scalaj.http.HttpResponse
 val accessToken = sys.env.get("GITHUB4S_ACCESS_TOKEN")
 ```
 
-They also make use of `cats.Id` but any type container implementing `MonadError[M, Throwable]` will do.
+They also make use of `cats.Id`, but any type container implementing `MonadError[M, Throwable]` will do.
 
-Support for `cats.Id`, `cats.Eval` and `Future` (the only supported option for scala-js) are
+Support for `cats.Id`, `cats.Eval`, and `Future` (the only supported option for scala-js) are
 provided out of the box when importing `github4s.{js,jvm}.Implicits._`.
 
 ## Notifications
@@ -37,7 +37,7 @@ This lets you subscribe or unsubscribe from a conversation.
 
 Unsubscribing from a conversation mutes all future notifications (until you comment or get @mentioned once more).
 
-You can subscribe or unsubscribe using `setThreadSub`, it takes as arguments:
+You can subscribe or unsubscribe using `setThreadSub`; it takes as arguments:
 
  - `id`: Thread id from which you subscribe or unsubscribe.
  - `subscribed`: Determines if notifications should be received from this thread.
@@ -46,7 +46,7 @@ You can subscribe or unsubscribe using `setThreadSub`, it takes as arguments:
 ```scala
 val threadSub = Github(accessToken).activities.setThreadSub(5,true,false)
 threadSub.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: s{e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
