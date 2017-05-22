@@ -163,7 +163,7 @@ trait TestData extends DummyGithubUrls {
     html_url = githubApiUrl,
     number = validIssueNumber,
     state = validIssueState,
-    user = user,
+    user = Some(user),
     assignee = None,
     labels = List.empty,
     locked = None,
@@ -308,7 +308,7 @@ trait TestData extends DummyGithubUrls {
     "https://api.github.com/repos/octocat/Hello-World/issues/comments/1",
     "https: //github.com/octocat/Hello-World/issues/1347#issuecomment-1",
     validCommentBody,
-    user,
+    Some(user),
     "2011-04-14T16:00:49Z",
     "2011-04-14T16:00:49Z"
   )
