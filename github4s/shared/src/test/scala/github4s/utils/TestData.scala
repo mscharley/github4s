@@ -364,7 +364,7 @@ trait TestData extends DummyGithubUrls {
     user = user,
     body = validCommentBody,
     commit_id = validCommitSha,
-    state = PRRStateCommented(),
+    state = PRRStateCommented,
     html_url = "",
     pull_request_url = ""
   )

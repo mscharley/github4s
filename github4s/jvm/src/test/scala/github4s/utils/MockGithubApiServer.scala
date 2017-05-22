@@ -638,15 +638,6 @@ trait MockGithubApiServer extends MockServerService with FakeResponses with Test
       request
         .withMethod("GET")
         .withPath(
-          s"/repos/$validRepoOwner/$validRepoName/pulls/$validPullRequestNumber/reviews/$validPullRequestReviewNumber")
-        .withHeader(not("Authorization")))
-    .respond(response.withStatusCode(unauthorizedStatusCode).withBody(unauthorizedResponse))
-
-  mockServer
-    .when(
-      request
-        .withMethod("GET")
-        .withPath(
           s"/repos/$validRepoOwner/$invalidRepoName/pulls/$validPullRequestNumber/reviews/$validPullRequestReviewNumber")
         .withHeader("Authorization", tokenHeader))
     .respond(response.withStatusCode(notFoundStatusCode).withBody(notFoundResponse))
@@ -664,16 +655,8 @@ trait MockGithubApiServer extends MockServerService with FakeResponses with Test
     .when(
       request
         .withMethod("GET")
-        .withPath(s"/repos/$validRepoOwner/$validRepoName/issues")
-        .withHeader(not("Authorization")))
-    .respond(response.withStatusCode(unauthorizedStatusCode).withBody(unauthorizedResponse))
-
-  mockServer
-    .when(
-      request
-        .withMethod("GET")
         .withPath(s"/repos/$validRepoOwner/$invalidRepoName/issues")
-        .withHeader(not("Authorization")))
+        .withHeader("Authorization", tokenHeader))
     .respond(response.withStatusCode(notFoundStatusCode).withBody(notFoundResponse))
 
   //Issues >> create
@@ -690,7 +673,7 @@ trait MockGithubApiServer extends MockServerService with FakeResponses with Test
       request
         .withMethod("POST")
         .withPath(s"/repos/$validRepoOwner/$validRepoName/issues")
-        .withHeader(not("Authorization")))
+        .withHeader("Authorization", tokenHeader))
     .respond(response.withStatusCode(unauthorizedStatusCode).withBody(unauthorizedResponse))
 
   mockServer
