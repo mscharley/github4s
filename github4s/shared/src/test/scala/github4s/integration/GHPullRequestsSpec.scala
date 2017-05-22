@@ -116,7 +116,7 @@ trait GHPullRequestsSpec[T] extends BaseIntegrationSpec[T] {
   it should "return error when an invalid repo name is passed" in {
     val response =
       Github(accessToken).pullRequests
-        .getReview(validRepoOwner, validRepoName, validPullRequestNumber, validPullRequestReviewNumber)
+        .getReview(validRepoOwner, invalidRepoName, validPullRequestNumber, validPullRequestReviewNumber)
         .execFuture[T](headerUserAgent)
 
     testFutureIsLeft(response)
