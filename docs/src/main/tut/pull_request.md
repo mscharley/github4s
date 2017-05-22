@@ -11,7 +11,7 @@ with Github4s, you can:
 - [List pull requests](#list-pull-requests)
 - [List the files in a pull request](#list-the-files-in-a-pull-request)
 - [Create a pull request](#create-a-pull-request)
-- [List reviews](#list-reviews)
+- [List reviews](#list-pull-request-reviews)
 - [Get a review](#get-an-individual-review)
 
 The following examples assume the following imports and token:
