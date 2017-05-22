@@ -156,4 +156,18 @@ class PullRequests[C, M[_]](
       review: Int): M[GHResponse[PullRequestReview]] = {
     httpClient.get[PullRequestReview](accessToken, s"repos/$owner/$repo/pulls/$pullRequest/reviews/$review", headers)
   }
+
+  def merge(
+      accessToken: Option[String] = None,
+      headers: Map[String, String] = Map(),
+      owner: String,
+      repo: String,
+      pullRequest: Int,
+      head: String,
+      commitTitle: String,
+      commitMessage: String,
+      mergeMethod: PullRequestMergeStrategy): M[GHResponse[PullRequestMergeResponse]] = {
+    val request = PullRequestMergeRequest(commitTitle, commitMessage, head, mergeMethod)
+    httpClient.put[PullRequestMergeResponse](accessToken, s"repos/$owner/$repo/pulls/$pullRequest/merge", headers, request.asJson.noSpaces)
+  }
 }

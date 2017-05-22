@@ -313,6 +313,8 @@ class Interpreters[M[_], C](
             pullRequests.listReviews(accessToken, headers, owner, repo, pullRequest)
           case GetPullRequestReview(owner, repo, pullRequest, review, accessToken) ⇒
             pullRequests.getReview(accessToken, headers, owner, repo, pullRequest, review)
+          case MergePullRequest(owner, repo, pullRequest, head, commitTitle, commitMessage, mergeMethod, accessToken) ⇒
+            pullRequests.merge(accessToken, headers, owner, repo, pullRequest, head, commitTitle, commitMessage, mergeMethod)
         }
       }
     }

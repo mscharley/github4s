@@ -330,4 +330,15 @@ class GHPullRequests(accessToken: Option[String] = None)(implicit O: PullRequest
       review: Int
   ): GHIO[GHResponse[PullRequestReview]] =
     O.getPullRequestReview(owner, repo, pullRequest, review, accessToken)
+
+  def merge(
+      owner: String,
+      repo: String,
+      pullRequest: Int,
+      head: String,
+      commitTitle: String,
+      commitMessage: String = "",
+      mergeMethod: PullRequestMergeStrategy = PRMSMerge
+  ): GHIO[GHResponse[PullRequestMergeResponse]] =
+    O.merge(owner, repo, pullRequest, head, commitTitle, commitMessage, mergeMethod, accessToken)
 }

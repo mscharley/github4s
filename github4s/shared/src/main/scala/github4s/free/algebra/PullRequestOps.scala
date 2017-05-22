@@ -64,6 +64,17 @@ final case class GetPullRequestReview(
     accessToken: Option[String] = None
 ) extends PullRequestOp[GHResponse[PullRequestReview]]
 
+final case class MergePullRequest(
+    owner: String,
+    repo: String,
+    pullRequest: Int,
+    head: String,
+    commitTitle: String,
+    commitMessage: String,
+    mergeMethod: PullRequestMergeStrategy,
+    accessToken: Option[String] = None
+) extends PullRequestOp[GHResponse[PullRequestMergeResponse]]
+
 /**
  * Exposes Pull Request operations as a Free monadic algebra that may be combined with other
  * Algebras via Coproduct
@@ -112,6 +123,17 @@ class PullRequestOps[F[_]](implicit I: Inject[PullRequestOp, F]) {
       review: Int,
       accessToken: Option[String] = None): Free[F, GHResponse[PullRequestReview]] =
     Free.inject[PullRequestOp, F](GetPullRequestReview(owner, repo, pullRequest, review, accessToken))
+
+  def merge(
+      owner: String,
+      repo: String,
+      pullRequest: Int,
+      head: String,
+      commitTitle: String,
+      commitMessage: String,
+      mergeMethod: PullRequestMergeStrategy,
+      accessToken: Option[String] = None): Free[F, GHResponse[PullRequestMergeResponse]] =
+    Free.inject[PullRequestOp, F](MergePullRequest(owner, repo, pullRequest, head, commitTitle, commitMessage, mergeMethod, accessToken))
 }
 
 /**

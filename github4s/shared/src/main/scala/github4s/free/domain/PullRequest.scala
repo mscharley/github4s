@@ -122,3 +122,14 @@ sealed abstract class PullRequestMergeStrategy(val value: String)
 case object PRMSMerge  extends PullRequestMergeStrategy("merge")
 case object PRMSRebase extends PullRequestMergeStrategy("rebase")
 case object PRMSSquash extends PullRequestMergeStrategy("squash")
+
+case class PullRequestMergeRequest(
+    commit_title: String,
+    commit_message: String,
+    sha: String,
+    merge_method: PullRequestMergeStrategy)
+
+case class PullRequestMergeResponse(
+    sha: String,
+    merged: Boolean,
+    message: String)
