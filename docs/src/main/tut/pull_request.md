@@ -49,7 +49,7 @@ val prFilters = List(PRFilterOpen, PRFilterSortPopularity)
 val listPullRequests = Github(accessToken).pullRequests.list("scala", "scala", prFilters)
 
 listPullRequests.exec[cats.Id, HttpResponse[String]]() match {
-  case Left(e) => println("Something went wrong: ${e.getMessage}")
+  case Left(e) => println(s"Something went wrong: ${e.getMessage}")
   case Right(r) => println(r.result)
 }
 ```
