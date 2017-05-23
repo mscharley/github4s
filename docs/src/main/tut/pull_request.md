@@ -134,7 +134,7 @@ See [the API doc](https://developer.github.com/v3/pulls/#create-a-pull-request) 
 
 ## List pull request reviews
 
-You can list the reviews for a pull request using `listReviews`, it takes as arguments:
+You can list the reviews for a pull request using `listReviews`; it takes as arguments:
 
 - the repository coordinates (`owner` and `name` of the repository).
 - the pull request id.
@@ -159,7 +159,7 @@ See [the API doc](https://developer.github.com/v3/pulls/reviews/#list-reviews-on
 
 ## Get an individual review
 
-You can get an individual review for a pull request using `getReview`, it takes as arguments:
+You can get an individual review for a pull request using `getReview`; it takes as arguments:
 
 - the repository coordinates (`owner` and `name` of the repository).
 - the pull request id.
