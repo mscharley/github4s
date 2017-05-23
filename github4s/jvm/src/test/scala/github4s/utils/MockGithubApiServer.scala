@@ -665,7 +665,7 @@ trait MockGithubApiServer extends MockServerService with FakeResponses with Test
       request
         .withMethod("POST")
         .withPath(s"/repos/$validRepoOwner/$validRepoName/issues")
-        .withHeader("Authorization", tokenHeader))
+        .withHeader(not("Authorization")))
     .respond(response.withStatusCode(unauthorizedStatusCode).withBody(unauthorizedResponse))
 
   mockServer
