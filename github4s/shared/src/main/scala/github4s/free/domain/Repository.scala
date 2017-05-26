@@ -103,6 +103,11 @@ case class Commit(
     author_url: Option[String]
 )
 
+case class CommitSummary(
+    sha: String,
+    url: String
+)
+
 case class NewReleaseRequest(
     tag_name: String,
     name: String,
@@ -150,6 +155,29 @@ case class CombinedStatus(
     statuses: List[Status],
     repository: StatusRepository
 )
+
+case class MergeRequest(
+    base: String,
+    head: String,
+    commit_message: Option[String]
+)
+
+case class MergeResponse(
+    sha: String,
+    commit: MergeCommit,
+    author: User,
+    committer: User,
+    parents: List[CommitSummary]
+)
+
+case class MergeCommit(
+    author: RefAuthor,
+    committer: RefAuthor,
+    message: String,
+    tree: CommitSummary,
+    comment_count: Int
+)
+
 object RepoUrlKeys {
 
   val forks_url         = "forks_url"

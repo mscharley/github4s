@@ -114,6 +114,8 @@ class Interpreters[M[_], C](
             target_url,
             description,
             context)
+        case Merge(owner, repo, base, head, commit_message, accessToken) =>
+          repos.merge(accessToken, headers, owner, repo, base, head, commit_message)
       }
     }
   }

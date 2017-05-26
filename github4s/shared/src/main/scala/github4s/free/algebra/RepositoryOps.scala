@@ -96,6 +96,15 @@ final case class CreateStatus(
     accessToken: Option[String] = None
 ) extends RepositoryOp[GHResponse[Status]]
 
+final case class Merge(
+    owner: String,
+    repo: String,
+    base: String,
+    head: String,
+    commit_message: Option[String],
+    accessToken: Option[String] = None
+) extends RepositoryOp[GHResponse[MergeResponse]]
+
 /**
  * Exposes Repositories operations as a Free monadic algebra that may be combined with other Algebras via
  * Coproduct
@@ -191,6 +200,16 @@ class RepositoryOps[F[_]](implicit I: Inject[RepositoryOp, F]) {
   ): Free[F, GHResponse[Status]] =
     Free.inject[RepositoryOp, F](
       CreateStatus(owner, repo, sha, state, target_url, description, context, accessToken))
+
+  def merge(
+      owner: String,
+      repo: String,
+      base: String,
+      head: String,
+      commitMessage: Option[String] = None,
+      accessToken: Option[String] = None
+  ): Free[F, GHResponse[MergeResponse]] =
+    Free.inject[RepositoryOp, F](Merge(owner, repo, base, head, commitMessage, accessToken))
 }
 
 /**

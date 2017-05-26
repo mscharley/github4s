@@ -109,6 +109,15 @@ class GHRepos(accessToken: Option[String] = None)(implicit O: RepositoryOps[GitH
       context: Option[String] = None
   ): GHIO[GHResponse[Status]] =
     O.createStatus(owner, repo, sha, state, target_url, description, context, accessToken)
+
+  def merge(
+      owner: String,
+      repo: String,
+      base: String,
+      head: String,
+      commitMessage: Option[String] = None
+  ): GHIO[GHResponse[MergeResponse]] =
+    O.merge(owner, repo, base, head, commitMessage, accessToken)
 }
 
 class GHAuth(accessToken: Option[String] = None)(implicit O: AuthOps[GitHub4s]) {

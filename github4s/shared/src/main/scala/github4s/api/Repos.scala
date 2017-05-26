@@ -265,4 +265,18 @@ class Repos[C, M[_]](
       s"repos/$owner/$repo/statuses/$sha",
       headers,
       dropNullPrint(NewStatusRequest(state, target_url, description, context).asJson))
+
+  def merge(
+      accessToken: Option[String] = None,
+      headers: Map[String, String] = Map(),
+      owner: String,
+      repo: String,
+      base: String,
+      head: String,
+      commitMessage: Option[String] = None): M[GHResponse[MergeResponse]] =
+    httpClient.post[MergeResponse](
+      accessToken,
+      s"repos/$owner/$repo/merges",
+      headers,
+      dropNullPrint(MergeRequest(base, head, commitMessage).asJson))
 }
