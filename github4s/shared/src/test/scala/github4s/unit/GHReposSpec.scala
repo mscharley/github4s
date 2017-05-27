@@ -164,4 +164,27 @@ class GHReposSpec extends BaseSpec {
         None,
         None)
   }
+
+  "GHRepos.merge" should "call to RepositoryOps with the right parameters" in {
+    val response: Free[GitHub4s, GHResponse[Option[MergeResponse]]] =
+      Free.pure(Right(GHResult(Some(validMergeResponse), okStatusCode, Map.empty)))
+    val repoOps = mock[RepositoryOpsTest]
+    (repoOps.merge _)
+      .expects(
+        validRepoOwner,
+        validRepoName,
+        validBase,
+        validCommitSha,
+        None,
+        sampleToken)
+      .returns(response)
+    val ghReposData = new GHRepos(sampleToken)(repoOps)
+    ghReposData
+      .merge(
+        validRepoOwner,
+        validRepoName,
+        validBase,
+        validCommitSha,
+        None)
+  }
 }

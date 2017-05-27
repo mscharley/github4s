@@ -103,7 +103,7 @@ final case class Merge(
     head: String,
     commit_message: Option[String],
     accessToken: Option[String] = None
-) extends RepositoryOp[GHResponse[MergeResponse]]
+) extends RepositoryOp[GHResponse[Option[MergeResponse]]]
 
 /**
  * Exposes Repositories operations as a Free monadic algebra that may be combined with other Algebras via
@@ -208,7 +208,7 @@ class RepositoryOps[F[_]](implicit I: Inject[RepositoryOp, F]) {
       head: String,
       commitMessage: Option[String] = None,
       accessToken: Option[String] = None
-  ): Free[F, GHResponse[MergeResponse]] =
+  ): Free[F, GHResponse[Option[MergeResponse]]] =
     Free.inject[RepositoryOp, F](Merge(owner, repo, base, head, commitMessage, accessToken))
 }
 

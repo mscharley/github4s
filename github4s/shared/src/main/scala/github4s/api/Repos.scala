@@ -266,6 +266,19 @@ class Repos[C, M[_]](
       headers,
       dropNullPrint(NewStatusRequest(state, target_url, description, context).asJson))
 
+  /**
+   * Merge code into a target branch.
+   *
+   * @param accessToken to identify the authenticated user
+   * @param headers optional user headers to include in the request
+   * @param owner of the repo
+   * @param repo name of the repo
+   * @param base the name of a branch to merge into
+   * @param head a branch or other ref to merge
+   * @param commitMessage Optional commit message to use for the merge
+   * @return A GHResponse with a response if Github provided one. Status == 204 with None as the return value means
+   *         the merge would do nothing and was not done.
+   */
   def merge(
       accessToken: Option[String] = None,
       headers: Map[String, String] = Map(),
@@ -273,8 +286,8 @@ class Repos[C, M[_]](
       repo: String,
       base: String,
       head: String,
-      commitMessage: Option[String] = None): M[GHResponse[MergeResponse]] =
-    httpClient.post[MergeResponse](
+      commitMessage: Option[String] = None): M[GHResponse[Option[MergeResponse]]] =
+    httpClient.post[Option[MergeResponse]](
       accessToken,
       s"repos/$owner/$repo/merges",
       headers,

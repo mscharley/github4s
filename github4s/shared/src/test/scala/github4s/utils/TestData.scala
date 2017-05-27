@@ -368,4 +368,12 @@ trait TestData extends DummyGithubUrls {
     html_url = "",
     pull_request_url = ""
   )
+
+  val validMergeResponse = MergeResponse(
+    validCommitSha,
+    MergeCommit(refCommitAuthor, refCommitAuthor, validCommitMsg, CommitSummary(validCommitSha, ""), 0),
+    user,
+    user,
+    List()
+  )
 }

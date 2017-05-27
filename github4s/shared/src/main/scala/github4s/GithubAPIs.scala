@@ -116,7 +116,7 @@ class GHRepos(accessToken: Option[String] = None)(implicit O: RepositoryOps[GitH
       base: String,
       head: String,
       commitMessage: Option[String] = None
-  ): GHIO[GHResponse[MergeResponse]] =
+  ): GHIO[GHResponse[Option[MergeResponse]]] =
     O.merge(owner, repo, base, head, commitMessage, accessToken)
 }
 
